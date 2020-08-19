@@ -1,0 +1,129 @@
+﻿@using BookItt.Models;
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+@{
+    ViewBag.Title = "Index";
+}
+<style>
+    .button {
+        background-color: #4CAF50; /* Green */
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+    }
+
+    .button2 {
+        background-color: #008CBA;
+    }
+    /* Blue */
+    .button3 {
+        background-color: #f44336;
+    }
+    /* Red */
+    .button4 {
+        background-color: #e7e7e7;
+        color: black;
+    }
+    /* Gray */
+    .button5 {
+        background-color: #555555;
+    }
+    /* Black */
+</style>
+<h2>Cart</h2>
+@{
+    if (Session["ShoppingCart"] != null)
+    {
+        using (Html.BeginForm("UpdateCart", "ShoppingCart", FormMethod.Post))
+        {
+            <table class="table">
+                <tr>
+
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        Price
+                    </th>
+                    <th>
+                        Quantity
+                    </th>
+                    <th>
+                        Total
+                    </th>
+
+                    <th></th>
+                </tr>
+
+                @foreach (var cart in (List<ShoppingCart>)Session["ShoppingCart"])
+                {
+                    <tr>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => cart.book.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => cart.book.Price)
+
+                        </td>
+                        <td>
+                            <input type="text" name="Quantity" id="quantity" value="@Html.DisplayFor(modelItem => cart.Quantity)" />
+                            &nbsp;<span id="errmsg"></span>
+                        </td>
+                        <td>
+                            ₪
+                            @(String.Format("{0:N0}", (double)cart.book.Price * (double)cart.Quantity))
+                        </td>
+                        <td>
+                            @Html.ActionLink("Delete", "DeleteItemCart", "ShoppingCart",
+    new { id = cart.book.BookID },
+    new { onclick = "return confirm('Are you sure you want to Delete this');" })
+                        </td>
+                    </tr>
+
+                }
+                <tr>
+                    <td colspan="3">Sum:</td>
+                    <td>
+                        @{
+                            List<ShoppingCart> temp = (List<ShoppingCart>)Session["ShoppingCart"];
+                            var total = String.Format("{0:N0}", temp.Sum(x => x.Quantity * x.book.Price));
+                        }
+                        ₪
+                        @total
+
+                    </td>
+                </tr>
+
+            </table>
+            <br />
+            @Html.ActionLink("Continue Shopping", "UsersIndex", "Books", null, new { @class = "button button2" }) @Html.ActionLink("CheckOut", "CheckOut", "ShoppingCart", null, new { @class = "button" }) <input style="float:right" type="submit" value="Update Cart" class="button button5">
+            <br />
+           
+            <br />
+
+        }
+    }
+    else
+    {
+        <h4 style="color:red">No Items in the Cart!!</h4>
+
+    }
+
+}
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#quantity").keypress(function (e) {
+            if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+                $("#errmsg").html("ENTER DIGITS ONLY!").show().fadeOut("slow");
+                return false;
+            }
+        });
+    });
+</script>
+

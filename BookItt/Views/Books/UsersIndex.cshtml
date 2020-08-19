@@ -1,0 +1,152 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model IEnumerable<BookItt.Models.Book>
+
+<h2>Books List</h2>
+
+
+<form action="Search" method="get">
+    <div class="form-group">
+        <label>Book Name:</label>
+        <input type="text" class="form-control" placeholder="Enter Book name" name="bookName">
+    </div>
+    <div class="form-group">
+        <label>Category:</label>
+        <input type="text" class="form-control" placeholder="Enter Category name" name="Genere">
+    </div>
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        .slidecontainer {
+            width: 100%;
+        }
+
+        .slider {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 15px;
+            border-radius: 5px;
+            background: #d3d3d3;
+            outline: none;
+            opacity: 0.7;
+            -webkit-transition: .2s;
+            transition: opacity .2s;
+        }
+
+            .slider:hover {
+                opacity: 1;
+            }
+
+            .slider::-webkit-slider-thumb {
+                -webkit-appearance: none;
+                appearance: none;
+                width: 20px;
+                height: 20px;
+                border-radius: 50%;
+                background: #4CAF50;
+                cursor: pointer;
+            }
+
+            .slider::-moz-range-thumb {
+                width: 20px;
+                height: 20px;
+                border-radius: 50%;
+                background: #4CAF50;
+                cursor: pointer;
+            }
+   
+        
+    </style>
+
+
+
+
+
+    <div class="slidecontainer">
+        <p></p>
+        <input type="range" min="1" max="100" value="50" class="slider" id="myRange" name="Price">
+        <p>Price Value: From ₪0 - ₪<span id="demo"></span></p>
+    </div>
+    <script>
+        var slider = document.getElementById("myRange");
+        var output = document.getElementById("demo");
+        output.innerHTML = slider.value;
+
+        slider.oninput = function () {
+            output.innerHTML = this.value;
+        }
+    </script>
+
+    <button type="submit" class="btn btn-info mb-2">Search</button>
+    <br />
+
+</form>
+<br />
+
+@Ajax.ActionLink("Increasing-Price", "EcresingPrice",new { id=1},new AjaxOptions()
+{
+    HttpMethod="GET",
+    UpdateTargetId="Aj",
+    InsertionMode=InsertionMode.Replace
+
+}, new { @class = "glyphicon glyphicon-arrow-up" })
+<span>|</span>
+@Ajax.ActionLink("Decreasing-Price", "DecresingPrice", new { id = 1 }, new AjaxOptions()
+{
+    HttpMethod="GET",
+    UpdateTargetId="Aj",
+    InsertionMode=InsertionMode.Replace
+
+},new { @class = "glyphicon glyphicon-arrow-down" })
+<div id="Aj">
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.section.Name)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.section.Name)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    <a  type="button" class="btn btn-sm btn-success" href="@Url.Action("OrderNow", "ShoppingCart",new { id = item.BookID },null)">
+                        <span class="glyphicon glyphicon-shopping-cart"></span>
+                        <span>Add to Cart</span>
+                    </a>
+                </td>
+            </tr>
+        }
+
+    </table>
+
+</div>
+
+

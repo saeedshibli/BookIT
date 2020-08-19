@@ -1,0 +1,104 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+@model BookItt.Models.Order
+
+@{
+    ViewBag.Title = "Delete";
+}
+<head>
+    <title></title>
+    <style type="text/css">
+        body {
+            font-family: Arial;
+            font-size: 10pt;
+        }
+
+        .tools a {
+            text-decoration: none;
+        }
+
+        #colors_sketch {
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Order</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.OrderDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OrderDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PaymentType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PaymentType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomerEmail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomerEmail)
+        </dd>
+        <dd style="color:red">
+            Please Sign Here to confirm your Cancelation!
+
+        </dd>
+
+    </dl>
+
+    <form method="POST">
+            <p>
+                <canvas width="400" height="300" id="signature"
+                        style="border:1px solid black"></canvas><br />
+
+            </p>
+        </form>
+
+        @section Scripts{
+        <script src="https://cdn.jsdelivr.net/npm/signature_pad@2.3.2/dist/signature_pad.min.js"></script>
+            <script>
+                $(function () {
+                    var canvas = document.querySelector('#signature');
+                    var pad = new SignaturePad(canvas);
+                    $('#accept').click(function () {
+                        var data = pad.toDataURL();
+                        $('#savetarget').attr('src', data);
+                        $('#SignatureDataUrl').val(data);
+                        pad.off();
+                    });
+                });
+            </script>
+        }
+
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "OrderHistory")
+        </div>
+    }
+</div>
+

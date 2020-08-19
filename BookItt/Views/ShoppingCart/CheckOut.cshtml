@@ -1,0 +1,207 @@
+﻿@using BookItt.Models;
+@using Microsoft.AspNet.Identity
+<script src="~/Scripts/jquery.validate.min.js"></script>
+@{
+    ViewBag.Title = "CheckOut";
+}
+
+<h2>Check Out</h2>
+<style>
+    input[type=text], select {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    input[type=email], select {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    table {
+        border-radius: 5px;
+        background-color: #f2f2f2;
+        padding: 20px;
+    }
+</style>
+@{
+    if (Session["ShoppingCart"] != null)
+    {
+
+        <table class="table">
+            <tr>
+
+                <th>
+                    Name
+                </th>
+                <th>
+                    Price
+                </th>
+
+                <th>
+                    Total
+                </th>
+
+                <th></th>
+            </tr>
+
+            @foreach (var cart in (List<ShoppingCart>)Session["ShoppingCart"])
+            {
+                <tr>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => cart.book.Name)
+                        X
+                        @Html.DisplayFor(modelItem => cart.Quantity)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => cart.book.Price)
+
+                    </td>
+
+                    <td>
+                        ₪
+                        @(String.Format("{0:N0}", (double)cart.book.Price * (double)cart.Quantity))
+                    </td>
+
+                </tr>
+
+            }
+            <tr>
+                <td colspan="3">Sum:</td>
+                <td>
+                    @{
+                        List<ShoppingCart> temp = (List<ShoppingCart>)Session["ShoppingCart"];
+                        var total = String.Format("{0:N0}", temp.Sum(x => x.Quantity * x.book.Price));
+                    }
+                    ₪
+                    @total
+
+                </td>
+            </tr>
+
+        </table>
+
+    }
+    else
+    {
+        <h4 style="color:red">No Items in the Cart!!</h4>
+
+    }
+
+}
+@using (Html.BeginForm("ProcessOrder", "ShoppingCart", FormMethod.Post, new { id = "customer-form" }))
+{
+
+
+    <tr>
+
+        <td>
+            <input type="text" name="firstname" placeholder="First name" required />
+        </td>
+        <td>
+            <input type="text" name="lastname" placeholder="Last name" required />
+        </td>
+
+
+        <td>
+            <br />
+            <input type="text" name="compname" placeholder="Company (optional) " />
+        </td>
+
+        <td>
+            <br />
+            <label for="country">Country</label>
+            <br />
+            <select id="country" name="country">
+                <option value="australia">Australia</option>
+                <option value="canada">Canada</option>
+                <option value="usa">USA</option>
+                <option value="usa">Israel</option>
+                <option value="usa">Italy</option>
+                <option value="usa">Germany</option>
+                <option value="usa">France</option>
+                <option value="usa">Spain</option>
+                <option value="usa">Turkey</option>
+            </select>
+        </td>
+        <td>
+            <br />
+            <label for="streetad">Street Adress</label>
+            <br />
+            <input type="text" name="streetad" placeholder="Home number and stree name" required />
+            <input type="text" name="streetad" placeholder="Apartment, suite, unit etc (optinal) " />
+        </td>
+        <td>
+            <br />
+            <label for="town">Town/City</label>
+            <br />
+            <input type="text" name="town" placeholder="" required />
+
+        </td>
+        <td>
+            <br />
+            <label for="phone">PhoneNumber</label>
+            <br />
+            <input type="text" id="phone" name="phone" required />
+
+            <br />
+            <label for="email">Email  </label>
+
+            
+            <br />
+            <input type="email" id="email" name="email" value="@User.Identity.GetUserName()" readonly />
+
+        </td>
+        <td>
+            <br />
+
+
+        </td>
+        <td>
+            <br />
+            <input type="submit" value="Process Order" style=" width: 100%;
+                                                              background-color: #4CAF50;
+                                                              color: white;
+                                                              padding: 14px 20px;
+                                                              margin: 8px 0;
+                                                              border: none;
+                                                              border-radius: 4px;
+                                                              cursor: pointer;">
+        </td>
+    </tr>
+
+}
+<script type="text/javascript">
+    $("#customer-form").validate({
+        rules: {
+            firstname: {
+                required: true
+            },
+            lastname: {
+                required: true
+            },
+            streetad: {
+                required: true
+            },
+            town: {
+                required: true
+            },
+            phone: {
+                required: true
+            },
+            email: {
+                required: true
+            }
+        }
+    });
+</script>

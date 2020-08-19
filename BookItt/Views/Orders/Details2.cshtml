@@ -1,0 +1,84 @@
+﻿@model BookItt.Models.Order
+@{
+    ViewBag.Title = "Details2";
+}
+
+<h2>Order Details</h2>
+
+<div>
+    <h4>Order:  @Html.DisplayFor(model => model.OrderID)</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.OrderDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OrderDate)
+           
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PaymentType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PaymentType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomerEmail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomerEmail)
+        </dd>
+
+    </dl>
+</div>
+
+
+<table class="table">
+    <tr>
+        <th>
+            Book Name
+        </th>
+        <th>
+            Quantity
+        </th>
+        <th>
+            Price
+        </th>
+    </tr>
+
+    @foreach (var item in Model.OrderBooks)
+    {
+        <tr>
+            <td>
+                @item.Book.Name
+            </td>
+            <td>
+                @item.Quantity
+            </td>
+            <td>
+                ₪
+                @item.price
+            </td>
+
+        </tr>
+    }
+    
+
+</table>
+<p>
+
+    @Html.ActionLink("Back to List", "OrderHistory")
+</p>

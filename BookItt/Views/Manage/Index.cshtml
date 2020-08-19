@@ -1,0 +1,144 @@
+﻿@model BookItt.Models.IndexViewModel
+@{
+    ViewBag.Title = "Manage";
+}
+
+<h2>@ViewBag.Title.</h2>
+
+<p class="text-success">@ViewBag.StatusMessage</p>
+<div>
+    <h4>Change your account settings</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        @if (ViewBag.userid == true)
+        {
+            <h4> <span class="badge badge-warning ">Welcome Admin!</span></h4>
+
+
+
+            <dt><strong>Editor:</strong></dt>
+            <dd>
+                <a type="button" class="btn btn-sm btn-primary" href="@Url.Action("Index", "Books")">
+                    <span class="glyphicon glyphicon-cog"></span>
+                    <span>Books Editor</span>
+                </a>
+
+            </dd>
+            <br />
+            <dd>
+                <a type="button" class="btn btn-sm btn-primary" href="@Url.Action("Index", "Sections")">
+                    <span class="glyphicon glyphicon-cog"></span>
+                    <span>Sections Editor</span>
+                </a>
+            </dd>
+            <br />
+            <dd>
+                <a type="button" class="btn btn-sm btn-primary" href="@Url.Action("Index", "Orders")">
+                    <span class="glyphicon glyphicon-cog"></span>
+                    <span>Orders Editor</span>
+                </a>
+            </dd>
+            <br />
+            <dd>
+                <a type="button" class="btn btn-sm btn-primary" href="@Url.Action("Index", "Role")">
+                    <span class="glyphicon glyphicon-cog"></span>
+                    <span>Role Editor</span>
+                </a>
+            </dd>
+            <br />
+            <dd style="color:red">
+                ----------------------------------------------------
+            </dd>
+
+        }
+        <dt>Password:</dt>
+        <dd>
+
+            @if (Model.HasPassword)
+            {
+                <a type="button" class="btn btn-sm btn-primary" href="@Url.Action("ChangePassword")">
+                    <span class="glyphicon glyphicon-pencil"></span>
+                    <span>Change Password</span>
+                </a>
+
+            }
+            else
+            {
+                <a type="button" class="btn btn-sm btn-primary" href="@Url.Action("SetPassword")">
+                    <span class="glyphicon glyphicon-pencil"></span>
+                    <span>Create Password</span>
+                </a>
+            }
+
+        </dd>
+        &nbsp;
+        <dt><br />External Logins:</dt>
+
+        <dd>
+            <a type="button" class="btn btn-sm btn-info" href="@Url.Action("ManageLogins")">
+                <span class="glyphicon glyphicon-sort"></span>
+                <span>Manage External Logins</span>
+            </a>
+            <strong>[@Model.Logins.Count]</strong>
+
+        </dd>
+        &nbsp;
+        <dt><br />Orders History:</dt>
+        <dd>
+            <a type="button" class="btn btn-sm btn-success" href="@Url.Action("OrderHistory", "Orders")">
+                <span class="glyphicon glyphicon-shopping-cart"></span>
+                <span>Manage Previous Orders</span>
+            </a>
+        </dd>
+        @*
+        Phone Numbers can used as a second factor of verification in a two-factor authentication system.
+
+         See <a href="https://go.microsoft.com/fwlink/?LinkId=403804">this article</a>
+            for details on setting up this ASP.NET application to support two-factor authentication using SMS.
+
+         Uncomment the following block after you have set up two-factor authentication
+        *@
+        @*
+        <dt>Phone Number:</dt>
+        <dd>
+            @(Model.PhoneNumber ?? "None")
+            @if (Model.PhoneNumber != null)
+            {
+                <br />
+                <text>[&nbsp;&nbsp;@Html.ActionLink("Change", "AddPhoneNumber")&nbsp;&nbsp;]</text>
+                using (Html.BeginForm("RemovePhoneNumber", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <text>[<input type="submit" value="Remove" class="btn-link" />]</text>
+                }
+            }
+            else
+            {
+                <text>[&nbsp;&nbsp;@Html.ActionLink("Add", "AddPhoneNumber")
+            }
+        </dd>
+        *@
+
+        @*@if (Model.TwoFactor)
+        {
+            using (Html.BeginForm("DisableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+                <text>Enabled
+                <input type="submit" value="Disable" class="btn btn-link" />
+                </text>
+            }
+        }
+        else
+        {
+            using (Html.BeginForm("EnableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+                <text>Disabled
+                <input type="submit" value="Enable" class="btn btn-link" />
+                </text>
+            }
+        }*@
+
+    </dl>
+</div>

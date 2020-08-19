@@ -1,0 +1,45 @@
+﻿@{
+    ViewBag.Title = "About Us";
+}
+<h2>@ViewBag.Title.</h2>
+
+<style>
+    .newspaper {
+        column-count: 2;
+        column-gap: 40px;
+        column-rule-style: solid;
+    }
+
+    @@font-face {
+        font-family: myFirstFont;
+        src: url(sansation_light.woff);
+    }
+
+    p {
+        font-family: myFirstFont;
+    }
+
+
+    .droplet {
+        background: mediumaquamarine;
+        border-radius: 2% 50%;
+        height: 120px;
+        margin: 100px;
+        transition: all 3s;
+        transition-timing: ease-in-out;
+        width: 120px;
+    }
+        div:hover {
+        transform: rotate(1080deg);
+    
+    }
+
+</style>
+<p class="newspaper">
+    BookIT was founded by Saeed Shibli and Dor Verchik ,back in 2005, the company started by opening first store then decided to open an online store . <br />
+    It was a very sucssuful move since then our company made her way to the Top . <br />
+    Today our company is the Number one Selling Books online!! and having two stories in Tel-Aviv and Rishion LeTzyion . <br />
+
+</p>
+
+<div class="droplet"><strong>For more Information Please Contact us .</strong></div>

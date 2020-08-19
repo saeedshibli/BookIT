@@ -1,0 +1,111 @@
+﻿@{
+    ViewBag.Title = "Contact Us";
+}
+
+<h2>@ViewBag.Title.</h2>
+
+
+<address>
+    BookIT,<br />
+    Hayarkon St 17, Tel Aviv, <br />
+    174502
+    <br />
+    <abbr title="Phone">P:</abbr>
+    +972-9256321
+
+    <a style="position:absolute;TOP:-90px; LEFT:290px; WIDTH:50px; HEIGHT:50px;width:162px;" class="weatherwidget-io" href="https://forecast7.com/en/32d0934d78/tel-aviv-yafo/" data-label_1="TEL AVIV" data-label_2="WEATHER" data-mode="Current" data-theme="retro-sky">TEL AVIV WEATHER</a>
+    <script>
+        !function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = 'https://weatherwidget.io/js/widget.min.js'; fjs.parentNode.insertBefore(js, fjs); } }(document, 'script', 'weatherwidget-io-js');
+    </script>
+
+</address>
+<address style="position:absolute;top:350px;" >
+
+    BookIT in The College,<br />
+    Eli Wiesel St 2, College of Managment ,<br />
+    Rishon LeTsiyon<br />
+    15620
+    <br />
+    <abbr title="Phone">P:</abbr>
+    +972-9365423
+    <a style="position:absolute;TOP:-120px; LEFT:290px; WIDTH:50px; HEIGHT:50px;width:162px;" class="weatherwidget-io" href="https://forecast7.com/en/31d9734d79/rishon-letsiyon/" data-label_1="RISHON LETSIYON" data-label_2="WEATHER" data-mode="Current" data-theme="marine">RISHON LETSIYON WEATHER</a>
+    <script>
+        !function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = 'https://weatherwidget.io/js/widget.min.js'; fjs.parentNode.insertBefore(js, fjs); } }(document, 'script', 'weatherwidget-io-js');
+    </script>
+</address>
+</br>
+<address style="position:absolute;top:600px;">
+    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@bookit.com</a><br />
+    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@bookit.com</a>
+
+</address>
+
+
+<style type="text/css">
+    /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+    #map {
+        position:absolute;
+        height: 500px;
+        width: 500px;
+        left: 700px;
+        top: -280px;
+    }
+</style>
+<aside class="col-md-3">
+    <div class="side-widget contact-info">
+        <script>
+            (function (exports) {
+                "use strict";
+
+                function initMap() {
+                    exports.map = new google.maps.Map(document.getElementById("map"), {
+                        center: {
+                            lat: 32.087432,
+                            lng: 34.771413
+                        },
+                        zoom: 10
+                    });
+                    exports.marker = new google.maps.Marker({
+                        position: {
+                            lat: 32.087432,
+                            lng: 34.771413
+                        },
+                        map: map
+                    });
+                    exports.marker = new google.maps.Marker({
+                        position: {
+                            lat: 31.969333,
+                            lng: 34.770343
+                        },
+                        map: map
+                    });
+                }
+
+                exports.initMap = initMap;
+            })((this.window = this.window || {}));
+        </script>
+
+
+        <div id="map"></div>
+
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCAKOlL6q6d_UTZG8eBhIGvvuB4jVyyNYw&callback=initMap&libraries=&v=weekly"
+                defer>
+
+        </script>
+    </div>
+</aside>
+</br>
+</br>
+</br>
+</br>
+</br>
+</br>
+</br>
+</br>
+</br>
+</br>
+</br>
+</br>
+

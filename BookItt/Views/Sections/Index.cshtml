@@ -1,0 +1,42 @@
+﻿@model IEnumerable<BookItt.Models.Section>
+
+@{
+    ViewBag.Title = "Admin Books Editing";
+}
+
+<h2>Admin Section Editing</h2>
+
+<p>
+    <a type="button" class="btn btn-sm btn-success" href="@Url.Action("Create", "Sections")">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span>Create New</span>
+    </a>
+   
+</p>
+<a type="button" class="btn btn-sm btn-primary" href="@Url.Action("Index", "Manage")">
+    <span class="glyphicon glyphicon-arrow-left"></span>
+    <span>Go Back</span>
+</a>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.SectionID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.SectionID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.SectionID })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,27 @@
+﻿
+@{
+    ViewBag.Title = "Weather Or Not";
+}
+<h2>WeatherJS</h2>
+<div class="col-md-12">
+    <h1>Current Conditions in <span data-bind="text:name"></span></h1>
+</div>
+<div class="col-md-12">
+    Temperature is <span data-bind="text:main.temp"></span>&deg; C
+</div>
+<button>Get Weather</button>
+<script type="text/javascript">
+    var weather = Object();
+    $(document).ready(function () {
+        $("button").click(function () {
+            $.get("@Url.Action("GetWeather", "Home")", function (response) {
+                //response
+                console.log(response);
+                //weather = ko.mapping.fromJS(response);  //populate the weather object
+                //ko.applyBindings(weather);
+
+            });
+        });
+    });
+
+</script>

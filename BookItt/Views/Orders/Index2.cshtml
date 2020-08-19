@@ -1,0 +1,61 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model PagedList.IPagedList<BookItt.Models.Order>
+
+
+@{
+    ViewBag.Title = "Index2";
+}
+
+<h2>Index2</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            OrderDate
+        </th>
+        <th>
+            PaymentType
+        </th>
+        <th>
+            Status
+        </th>
+        <th>
+            CustomerEmail
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @*@Html.DisplayFor(modelItem => item.OrderDate)*@
+                @String.Format("{0:dd/MM/yyyy}", item.OrderDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PaymentType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CustomerEmail)
+            </td>
+            <td>
+
+                @Html.ActionLink("Details", "Details2", new { id = item.OrderID })
+
+            </td>
+        </tr>
+    }
+
+</table>
+<div class="clear"></div>
+@if (@Model.PageCount > 1) {
+    <span>Page@(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)/@Model.PageCount</span>
+<div class="div-pagination">
+    @Html.PagedListPager(Model, page => Url.Action("Index2", new { page = page }))
+</div>
+}

@@ -1,0 +1,77 @@
+﻿@model IEnumerable<BookItt.Models.Order>
+@{
+    ViewBag.Title = "OrderHistory";
+}
+
+<h2>OrderHistory</h2>
+<form action="Search" method="get">
+    <div class="form-group">
+        <label>Order ID:</label>
+        <input type="number" class="form-control" placeholder="Enter Order ID" name="OrderID">
+    </div>
+    <div class="form-group">
+        <label>Status :</label>
+        <input type="text" class="form-control" placeholder="Enter Status" name="Status">
+    </div>
+    <div class="form-group">
+        <label>Date :</label>
+        <input type="date" class="form-control" placeholder="" name="OrderDate">
+    </div>
+   
+    <button type="submit" class="btn btn-info mb-2">Search</button>
+    <br />
+</form>
+
+    <p>
+        <a href="@Url.Action("UsersIndex", "Books")">Create a New Order</a>
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PaymentType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CustomerEmail)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OrderDate)
+
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PaymentType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CustomerEmail)
+                </td>
+                <td>
+                    @if (item.Status != "Shipped")
+                    {
+                        @Html.ActionLink("Details", "Details2", new { id = item.OrderID })
+                        <a>|</a>
+                        @Html.ActionLink("Delete Order", "Delete", new { id = item.OrderID })
+
+                    }
+                    @if (item.Status == "Shipped")
+                    {
+                        @Html.ActionLink("Details", "Details2", new { id = item.OrderID })
+                    }
+                </td>
+            </tr>
+        }
+
+    </table>

@@ -1,0 +1,17 @@
+﻿
+@{
+    ViewBag.Title = "WeatherJS";
+}
+<h2>WeatherJS</h2>
+<p id="reply"></p>
+<button>Click Here</button>
+<script type="text/javascript">var weather = Object();
+    var appid = "4063510f8ae9f9c79b022c778c843625";
+    $(document).ready(function () {
+        $("button").click(function () {
+            $.get("http://api.openweathermap.org/data/2.5/weather?lat=31.5&lon=34.75&appid=" + appid, function (response) {
+                $("#reply").text(response.name);
+
+            });
+        });
+    });</script>

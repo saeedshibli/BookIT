@@ -1,0 +1,228 @@
+﻿
+@{
+    ViewBag.Title = "Home Page";
+}
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+
+
+
+<style>
+    aside {
+        width: 30%;
+        left: 870px;
+        top: 150px;
+        float: right;
+        font-style: italic;
+        position: absolute;
+    }
+    #fofo {
+
+       
+    }
+    fofo:hover {
+     
+    }
+</style>
+
+<div class="jumbotron">
+    <header>
+        <h1>BookIt</h1>
+        <p class="lead">BookIt is The number 1 Selling-Books Store World Wide !!</p>
+
+        <p><a id="fofo" href="@Url.Action("UsersIndex","Books")" class="btn btn-success btn-lg">Buy your first Book NOW &raquo;</a></p>
+        <aside>
+            <img width="400" src="~/resources/interior-design-books.gif" alt="Flowers in Chania">
+        </aside>
+    </header>
+
+</div>
+
+
+
+<div class="row">
+
+
+    <div class="col-md-4">
+        <section>
+            <h2>Getting started</h2>
+            <p>
+                BookIT , is the number one selling store worldwide , start your joureny with us ,and create an account for getting for points therefore more prizes!!.
+            </p>
+            <nav><a class="btn btn-default" href="@Url.Action("UsersIndex","Books")">Learn more &raquo;</a></nav>
+        </section>
+            </div>
+    <div class="col-md-4">
+        <section>
+            <h2>Buy 2 -> Get 3!</h2>
+            <p>Buy two books and the Third on US!!,don't lose this Opportunity!!(Avaliable only This Month).</p>
+            <nav><a class="btn btn-default" href="@Url.Action("UsersIndex","Books")">Learn more &raquo;</a></nav>
+            </section>
+</div>
+    <div class="col-md-4">
+        <section>
+            <h2>We"re here to Help you!</h2>
+            <p>You can easily contact us online or in our stories ,click to learn more .</p>
+            <nav><a class="btn btn-default" href="@Url.Action("Contact","Home") ">Learn more &raquo;</a></nav>
+            </section>
+</div>
+</div>
+<br />
+<div class="row">
+    <div class="col-md-4">
+        <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+    </div>
+    <div class="col-md-4">
+        <div id="container2" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+    </div>
+    <div class="col-md-4">
+        <div id="container3" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+    </div>
+
+</div>
+
+@*11111111*@
+<script type="text/javascript">
+    $(document).ready(function () {
+        $.getJSON("/Home/GetData", function (data) {
+            var Names = []
+            var Qts = []
+            for (var i = 0; i < data.length; i++) {
+                Names.push(data[i].name);
+                Qts.push(data[i].count);
+            }
+
+            Highcharts.chart('container', {
+                chart: {
+                    type: 'line'
+                },
+                title: {
+                    text: 'Top 5 Books Sold '
+                },
+                subtitle: {
+                    text: 'Source: BookIt.com'
+                },
+                xAxis: {
+                    categories: Names
+                },
+                yAxis: {
+                    title: {
+                        text: 'Books Quantity Orders'
+                    }
+                },
+                plotOptions: {
+                    line: {
+                        dataLabels: {
+                            enabled: true
+                        },
+                        enableMouseTracking: false
+                    }
+                },
+                series: [{
+                    name: 'Sales',
+                    data: Qts
+                }]
+            });
+        });
+    });
+
+
+</script>
+@*22222222*@
+<script type="text/javascript">
+    $(document).ready(function () {
+        $.getJSON("/Home/GetData2", function (data) {
+            var Names = []
+            var Qts = []
+            for (var i = 0; i < data.length; i++) {
+                Names.push(data[i].name);
+                Qts.push(data[i].count);
+            }
+
+            Highcharts.chart('container2', {
+                chart: {
+                    type: 'line'
+                },
+                title: {
+                    text: 'Top 5 Books Category '
+                },
+                subtitle: {
+                    text: 'Source: BookIt.com'
+                },
+                xAxis: {
+                    categories: Names
+                },
+                yAxis: {
+                    title: {
+                        text: 'Books Quantity Orders'
+                    }
+                },
+                plotOptions: {
+                    line: {
+                        dataLabels: {
+                            enabled: true
+                        },
+                        enableMouseTracking: false
+                    }
+                },
+                series:[{
+                    name: ' '
+                },
+                {
+                     name: ' '
+                },
+                {
+                     name: 'Sales',
+                     data: Qts
+                    }]
+            });
+        });
+    });
+</script>
+@*3333333333*@
+<script type="text/javascript">
+    $(document).ready(function () {
+        $.getJSON("/Home/GetData3", function (data) {
+            var Names = []
+            var Qts = []
+            for (var i = 0; i < data.length; i++) {
+                Names.push(data[i].name);
+                Qts.push(data[i].count);
+            }
+
+            Highcharts.chart('container3', {
+                chart: {
+                    type: 'line'
+                },
+                title: {
+                    text: 'Our Top Customers '
+                },
+                subtitle: {
+                    text: 'Source: BookIt.com'
+                },
+                xAxis: {
+                    categories: Names
+                },
+                yAxis: {
+                    title: {
+                        text: 'Books Quantity Orders'
+                    }
+                },
+                plotOptions: {
+                    line: {
+                        dataLabels: {
+                            enabled: true
+                        },
+                        enableMouseTracking: false
+                    }
+                },
+                series:[ { name:' '
+                }, {
+                    name: 'Sales',
+                    data: Qts
+                }]
+            });
+        });
+    });
+</script>
